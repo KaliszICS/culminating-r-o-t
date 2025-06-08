@@ -4,6 +4,9 @@
  * @version 1.0.0
  */
 
+import java.util.Random;
+import java.util.Scanner;
+
 abstract class Pokemon{
     private String name = "";
     private double level = 1;
@@ -12,6 +15,8 @@ abstract class Pokemon{
     private int energy = 0;
     private double shield = 1;
     private int price = 0;
+    private double damage = 0;
+    private int originalShield = 1;
 
     public final int MAX_LEVEL = 10;
     
@@ -24,41 +29,48 @@ abstract class Pokemon{
      * @param type String 
      * @param energy int 
      * @param price int (Will automatically set to 0 if not provided)
+     * @param damage double 
      */
-    public Pokemon(String name, int level, double hp, String type, int energy, int price){
+    public Pokemon(String name, int level, double hp, String type, int energy, int price, double damage, int shield){
         this.name = name;
         this.level = level;
         this.hp = hp; 
         this.type = type;
         this.energy = energy;
         this.price = price;
+        this.damage = damage;
+        this.shield = shield;
+        this.originalShield = shield;
     }
 
 
     //No level constructor
-    public Pokemon(String name, double hp, String type, int energy, int price){
+    public Pokemon(String name, double hp, String type, int energy, int price, double damage){
         this.name = name;
         this.hp = hp;
         this.type = type;
         this.energy = energy;
         this.price = price;
+        this.damage = (damage + this.level) * (damage + this.level);
     }
 
     //No price constructor
-    public Pokemon(String name, int level, double hp, String type, int energy){
+    public Pokemon(String name, int level, double hp, String type, int energy, double damage){
         this.name = name;
         this.level = level;
         this.hp = hp;
         this.type = type;
         this.energy = energy;
+        this.damage = (damage + this.level) * (damage + this.level);
     }
 
     //No price and no level constructor
-    public Pokemon(String name, double hp, String type, int energy){
+    public Pokemon(String name, double hp, String type, int energy, double damage){
         this.name = name;
         this.hp = hp;
         this.type = type;
         this.energy = energy;
+        this.damage = (damage + this.level) * (damage + this.level);
     }
 
     /**
@@ -98,7 +110,7 @@ abstract class Pokemon{
      * @return double - the health of the Pokemon
      */
     public double getHp(){
-        return this.level;
+        return this.hp;
     }
 
     /**
@@ -173,32 +185,189 @@ abstract class Pokemon{
         this.shield = shield;
     }
 
+    /**
+     * Method to get the damage of the pokemon
+     * @return double - the damage of the pokemon
+     */
+    public double getDamage(){
+        return this.damage;
+    }
+
+    /**
+     * Method to set the damage of the pokemon
+     * @param damage double - damage will equal (damage + level)^2
+     */
+    public void setDamage(double damage){
+        this.damage = (damage + this.level) * (damage + this.level);
+    }
+
+    /**
+     * Method to get the original shield of the pokemon
+     * @return int - the original shield of the pokemon
+     */
+    public int getOriginalShield(){
+        return this.originalShield;
+    }
+
+    public void setOriginalShield(int shield){
+        this.originalShield = shield;
+    }
+
 
     //Method to attack the oppponent
     public void attack(Pokemon opponent){
-        opponent.takeDamage((this.level * this.level/opponent.getShield()) + 5); // damages the opponent by the level of the pokemon^2/shield of opponent + 5
+        opponent.takeDamage((this.damage/opponent.getShield()) + 5); // damages the opponent by the level of the pokemon^2/shield of opponent + 5
         this.energy += (this.level + 1) * (this.level + 1); //Adds to the pokemons energy by the (level + 1)^2
-        opponent.setShield(opponent.getLevel()); //resets the shield of the opponent to their level
     }
 
     //Method to defend
-    public String defend(Pokemon opponent){
-        this.shield += this.level * 2;   //defends by increasing the pokemons shield by its level * 2
-        return (name + " gained " + shield + " shield!");
+    public void defend(){
+        this.shield += this.shield* this.level * 2;   //defends by increasing the pokemons shield by its level * 2
+        System.out.println(this.getName() + " now has " + this.getShield() + " shield!");
     }
 
     //Method to heal
-    public String heal(){
+    public void heal(){
         this.hp += this.level * 2; //Adds to the health of the Pokemon by its level * 2
-        return (name + " now has " + hp + " hp!");
+        System.out.println (name + " now has " + hp + " hp!");
     }
 
     //Method for special move (Each Pokemon must have at least 1)
-    abstract String specialMove(Pokemon opponent);
+    abstract void specialMove(Pokemon opponent);
 
     //Method for taking damage
-    public String takeDamage(double damage){
+    public void takeDamage(double damage){
         this.hp -= damage;
-        return (name + " took " + damage + " damage! Current health: " + this.hp);
+        System.out.println (name + " took " + damage + " damage! Current health: " + this.hp);
+    }
+
+    public String getStats(){
+        return (this.getName() + ": Hp = " + this.getHp() + ", energy = " + this.getEnergy() + ", level = " + this.getLevel() + ", damage = " + this.getDamage() + ", current shield = " + this.getShield());
+    }
+
+    public boolean move(Pokemon opponent, String choice){
+
+        switch (choice){
+            case "1":
+            this.attack(opponent);
+            return true;
+                    
+            case "2":
+            this.defend();
+            return true;
+                    
+            case "3":
+            if (this.getEnergy() > 30){
+                this.heal();
+                this.setEnergy(this.getEnergy() - 30);
+                return true;
+            }
+            System.out.println("Not enough energy to heal");
+            return false;
+                    
+            case "4":
+            if (this.getEnergy() > 50){
+                this.setEnergy(this.getEnergy() - 50);
+                this.specialMove(opponent);
+                return true;
+            }        
+            System.out.println("Not enough energy for special move");
+            return false;
+                    
+            default:
+                System.out.println("Move not valid");
+                return false;
+        }
+                
+	}
+    
+    
+
+
+
+
+
+    /**
+     * Method for choosing the level the user wants to play (Pokemon.playLevel(level))
+     * @param level int - the level the user wants to play (1 - the maximum reached level)
+     */
+    public boolean playLevel (int level){
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+        boolean validMove = false;
+
+		switch (level){
+			case 1:
+			Charizard opponent = new Charizard(100, 50);
+            return this.fight(opponent);  
+            
+            
+
+            default:
+            System.out.println("You can't play this level");
+            return false;
+        }
+
+
+        
+    }
+    
+
+
+
+    /**
+     * Method for fighting the opponent (Pokemon.fight(Pokemon))
+     * @param opponent Pokemon
+     * @return boolean - true if user won the fight false if they lost
+     */
+    public boolean fight(Pokemon opponent){
+        
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+        int firstToGo = rand.nextInt(2);
+        boolean validMove = false;
+
+        if (firstToGo == 0){
+            System.out.println(this.getName() + " goes first");
+        }
+        else{
+            System.out.println(opponent.getName() + " goes first");
+            validMove = true;
+        }
+        while (this.getHp() > 0 && opponent.getHp() > 0){
+            while (validMove == false){
+            this.setShield(this.getOriginalShield());
+            System.out.println("Your turn\n" + 
+                                "1. Attack   2. Defend   3. Heal   4. Special Move\n" +
+                                this.getStats() + "\n" +
+                                opponent.getStats());
+            String choice = scanner.nextLine();
+            validMove = this.move(opponent, choice);
+           } 
+    
+            validMove = false;
+            while (validMove == false){
+                opponent.setShield(opponent.getOriginalShield());
+                System.out.println("Opponenet's turn");
+                int opponentMove = rand.nextInt(4) + 1;
+                validMove = opponent.move(this, Integer.toString(opponentMove));
+            }
+            validMove = false;
+        }
+    
+        if (this.getHp() <= 0){
+            System.out.println("You Lose");
+            this.setHp(100);
+            this.setEnergy(0);
+            return false;
+        }
+        else{
+            this.setLevel(this.getLevel() + 1 - Math.log((int)this.getLevel()));
+            System.out.println("You Won\n" +
+                                this.getName() + "'s new level: " + this.getLevel());
+            this.setHp(100);
+            this.setEnergy(0);
+            return true;
+        }
     }
 }

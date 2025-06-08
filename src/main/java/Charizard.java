@@ -19,24 +19,24 @@ class Charizard extends Pokemon{
 
     //Constructor without level
     public Charizard(double hp, int energy, int price){
-        super ("Charizard", hp, "Fire", energy, price);
+        super ("Charizard", hp, "Fire", energy, price, 3);
     }
 
     //Constructor without price
     public Charizard(int level, double hp, int energy){
-        super ("Charizard", level, hp, "Fire", energy);
+        super ("Charizard", level, hp, "Fire", energy, 3);
     }
 
     //Constructor without level and price
     public Charizard(double hp, int energy){
-        super ("Charizard", hp, "Fire", energy);
+        super ("Charizard", hp, "Fire", energy, 3);
     }
 
     @Override
-    public String specialMove(Pokemon opponent){
+    public void specialMove(Pokemon opponent){
         opponent.setShield(1); //removes the opponenets shield
         this.attack(opponent); // does a basic attack
-        return ("Charizard used Fireball!");
+        System.out.println("Charizard used Fireball!");
     }
 
 }

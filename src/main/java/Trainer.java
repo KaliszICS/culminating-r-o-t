@@ -3,16 +3,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Trainer {
-    public String name;
-    public ArrayList<Pokemon>team;
-    public Pokemon activePokemon;
-    public int gameLevel;
+    private String name;
+    private ArrayList<Pokemon>team;
+    private Pokemon activePokemon;
+    private int gameLevel;
 
 
 public Trainer (String name, int gameLevel){
     this.name = name;
     this.gameLevel = gameLevel;
     this.team = new ArrayList<>();
+}
+
+public Trainer (String name){
+    this.name = name;
+    this.gameLevel = 0;
 }
 
 
@@ -31,7 +36,7 @@ public void addPokemon (Pokemon p){
 
     //switch active pokemon out for another.
     public Pokemon switchPokemon (String name){
-        for (pokemon p: team){
+        for (Pokemon p: team){
             if(p.getName().equalsIgnoreCase(name)){
                 activePokemon = p;
                 System.out.println(p.getName() + "is now your active pokemon." + p.getName() + "is now ready to battle!");
