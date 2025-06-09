@@ -9,6 +9,14 @@ public class Main {
 
 	public static void main(String args[]) {
 		Trainer trainer = new Trainer();
+		Shop shop = new Shop(
+		new String[]{"Pikachu", "Charizard", "Bulbasaur"},
+		new int[]{200, 450, 100},  // Prices
+		new int[]{60, 250, 80},     // Health
+		new int[]{5, 15, 4},        // Level
+		new int[]{55, 122, 49},     // Damage
+		new String[]{"Electric", "Fire", "Grass"}  // Types
+		);
 		Scanner scanner = new Scanner(System.in);
 		String choice;
 
@@ -75,10 +83,59 @@ public class Main {
 				else{
 
 				}
+			break;
 
+			case "2":
+			System.out.println("Welcome to the shop!");
+			boolean stayInShop = true;
 
+			while (stayInShop) {
+				System.out.println("What would you like to do?");
+				System.out.println("1. Display Inventory");
+				System.out.println("2. Sort by Price");
+				System.out.println("3. Sort by Health");
+				System.out.println("4. Sort by Level");
+				System.out.println("5. Sort by Damage");
+				System.out.println("6. Exit shop");
+				String shopChoice = scanner.nextLine();
+
+				switch(shopChoice) {
+					case "1":
+						shop.displayInventory();
+						break;
+					case "2":
+						shop.sortPrice();
+						System.out.println("Sorted by price.");
+						shop.displayInventory();
+						break;
+					case "3":
+						shop.sortHealth();
+						System.out.println("Sorted by health.");
+						shop.displayInventory();
+						break;
+					case "4":
+						shop.sortLevel();
+						System.out.println("Sorted by level.");
+						shop.displayInventory();
+						break;
+					case "5":
+						shop.sortDamage();
+						System.out.println("Sorted by damage.");
+						shop.displayInventory();
+						break;
+					case "6":
+						stayInShop = false;
+						break;
+					default:
+						System.out.println("Invalid choice.");
+						break;
+				}
 			}
+			break;
 		}
+	}
+		
+		
 
 
 
