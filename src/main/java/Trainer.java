@@ -19,6 +19,7 @@ public Trainer (String name, Pokemon activePokemon ){
     this.name = name;
     this.gameLevel = 0;
     this.activePokemon = activePokemon;
+    this.team = new ArrayList<>();
 }
 
 
@@ -79,6 +80,14 @@ public void addPokemon (Pokemon p){
 
     public int getGameLevel(){
         return gameLevel;
+    }
+
+
+    public void teamToString(){
+        int length = this.getTeam().size();
+		for (int i = 0; i < length; i++){
+			System.out.println((i + 1) + ". " + this.getTeam().get(i).toString());
+        }
     }
 
 
