@@ -15,11 +15,14 @@ public Trainer (String name, int gameLevel){
     this.team = new ArrayList<>();
 }
 
-public Trainer (String name){
+public Trainer (String name, Pokemon activePokemon ){
     this.name = name;
     this.gameLevel = 0;
+    this.activePokemon = activePokemon;
 }
 
+
+public Trainer(){};
 
 public void addPokemon (Pokemon p){
     if (team.size()<6){
@@ -76,6 +79,16 @@ public void addPokemon (Pokemon p){
 
     public int getGameLevel(){
         return gameLevel;
+    }
+
+
+    /**
+     * Method to set the maximum reached level of the trainer
+     * @author Radin Ajorlou
+     * @param gameLevel - int the new maximum reached level of the trainer
+     */
+    public void setGameLevel(int gameLevel){
+        this.gameLevel = gameLevel;
     }
 
 }
