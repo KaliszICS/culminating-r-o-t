@@ -9,14 +9,11 @@ public class Main {
 
 	public static void main(String args[]) {
 		Trainer trainer = new Trainer();
-		Shop shop = new Shop(
-		new String[]{"Pikachu", "Charizard", "Bulbasaur"},
-		new int[]{200, 450, 100},  // Prices
-		new int[]{60, 250, 80},     // Health
-		new int[]{5, 15, 4},        // Level
-		new int[]{55, 122, 49},     // Damage
-		new String[]{"Electric", "Fire", "Grass"}  // Types
-		);
+		List<Pokemon> pokemonList = new ArrayList<>();
+		pokemonList.add(new Pikachu(80, 40));     // Adjust as needed(add bulbasaur class)
+		pokemonList.add(new Charizard(100, 50));  
+		pokemonList.add(new Bulbasaur(90, 35));   // Adjust as needed (add bulbasaur class)
+		Shop shop = new Shop(pokemonList);
 		Scanner scanner = new Scanner(System.in);
 		String choice;
 
@@ -27,11 +24,10 @@ public class Main {
 			if (choice.equals("1")){
 				System.out.println("Choose your trainer's name: ");
 				String name = scanner.nextLine();
-				System.out.println("Choose your starting Pokemon\n" +
-									"1. Charizard   2. b   3. c");
-				
-				Charizard charizard = new Charizard(100, 0);
-				trainer = new Trainer(name, charizard); //creates a new trainer with the users chosen name
+				System.out.println("Here's your first Pokemon: CHARIZARD!");
+				Charizard charizard = new Charizard(100.0, 0);
+				trainer = new Trainer(name, charizard); //creates a new trainer with the users Charizard
+				trainer.addPokemon(charizard); //adds the Charizard to the trainer's team
 			}
 
 		}
@@ -81,7 +77,63 @@ public class Main {
 				}
 
 				else{
+					String originalChoice = "";
+					System.out.println("Here are your Pokemon: ");
+					trainer.teamToString();
+					while (!originalChoice.equals("b")){
+						System.out.println("\n1. Sort   2. Search   3. Switch   b. Go back");
+						originalChoice = scanner.nextLine();
+						while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("b")){
+							System.out.println("Not a real choice");
+							choice = scanner.nextLine();
+						}
+						switch (choice){
+	
+							case "1":
+							System.out.println("Sort by: 1. Name   2. Level   3. Damage   4. Health   5. Shield   b. Go back");
+							choice = scanner.nextLine();
+							while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("b")){
+								System.out.println("Not a real choice");
+								choice = scanner.nextLine();
+							}
+							switch (choice){
+								case "1":
+									trainer.getTeam().sortName();
+									trainer.teamToString();
+									break;
+								case "2":
+									trainer.getTeam().sortLevel();
+									trainer.teamToString();
+									break;
+								case "3":
+									trainer.getTeam().sortDamage();
+									trainer.teamToString();
+									break;
+								case "4":
+									trainer.getTeam().sortHealth();
+									trainer.teamToString();
+									break;
+								case "5":
+									trainer.getTeam().sortShield();
+									trainer.teamToString();
+									break;
+								case "b":
+									break;
+							}
+							break;
 
+
+							case "2":
+							System.out.println("Search by: 1. Name   2. Type   b. Go back");
+							choice = scanner.nextLine();
+							while (!choice.equals("1") && !choice.equals("2") && !choice.equals("b")){
+								System.out.println("Not a real choice");
+								choice = scanner.nextLine();
+							}
+
+	
+						}
+					}
 				}
 			break;
 

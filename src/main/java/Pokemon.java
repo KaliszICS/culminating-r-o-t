@@ -280,6 +280,11 @@ abstract class Pokemon{
         }
                 
 	}
+
+    @Override
+    public String toString(){
+        return "Name: " + this.getName() + ", Level: " + this.getLevel() + ", HP: " + this.getHp() + ", Type: " + this.getType() + ", Energy: " + this.getEnergy() + ", Price: " + this.getPrice() + ", Damage: " + this.getDamage() + ", Shield: " + this.getShield();
+    }
     
     
 
