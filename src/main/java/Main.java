@@ -23,6 +23,8 @@ public class Main {
 		do{
 			System.out.println("1. New game   2. Load game");
 			choice = scanner.nextLine();
+
+			//Starts a new game 
 			if (choice.equals("1")){
 				System.out.println("Choose your trainer's name: ");
 				String name = scanner.nextLine();
@@ -33,13 +35,13 @@ public class Main {
 			}
 
 		}
-		while (!choice.equals("1") && !choice.equals("2"));
+		while (!choice.equals("1") && !choice.equals("2")); // runs until user inputs 1 or 2
 
 		while (true){
-			System.out.println("1. Fight   2. Go to shop   3. Save game   4. Load File");
+			System.out.println("1. Fight   2. Go to shop   3. Save game   4. Quit game");
 			choice = scanner.nextLine();
 			switch(choice){
-				case "1":
+				case "1": //The user decides to fight
 				System.out.println("Choose Level: 1 - " + (trainer.getGameLevel() + 1) + "\nb. Go back");
 				choice = scanner.nextLine();
 				int levelChoice;
@@ -67,10 +69,10 @@ public class Main {
 				}
 
 				if (choice.equals("b")){
-					break;
+					break; //user decided to go back 
 				}
 
-				else if(choice.equals("1")){ 
+				else if(choice.equals("1")){ // user decided to play with active Pokemon
 					boolean wonOrLost = trainer.getActivePokemon().playLevel(levelChoice); //battles level choice with active Pokemon
 					if (wonOrLost == true && levelChoice > trainer.getGameLevel()){
 						trainer.setGameLevel(levelChoice);
@@ -78,7 +80,7 @@ public class Main {
 					}
 				}
 
-				else{
+				else{ // user decided to switch Pokemon
 					String originalChoice = "";
 					System.out.println("Here are your Pokemon: ");
 					trainer.teamToString();
@@ -92,7 +94,7 @@ public class Main {
 						}
 						switch (choice){
 	
-							case "1":
+							case "1": // User decided to sort their team
 							System.out.println("Sort by: 1. Name   2. Level   3. Damage   4. Health   5. Shield   b. Go back");
 							choice = scanner.nextLine();
 							while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("b")){
@@ -100,38 +102,72 @@ public class Main {
 								choice = scanner.nextLine();
 							}
 							switch (choice){
-								case "1":
+								case "1": //User decided to sort by name
 									trainer.sortName();
 									trainer.teamToString();
 									break;
-								case "2":
+
+								case "2": //User decided to sort by level
 									trainer.sortLevel();
 									trainer.teamToString();
 									break;
-								case "3":
+
+								case "3": //User decided to sort by damage
 									trainer.sortDamage();
 									trainer.teamToString();
 									break;
-								case "4":
+
+								case "4": //User decided to sort by health
 									trainer.sortHealth();
 									trainer.teamToString();
 									break;
-								case "5":
+
+								case "5": //User decided to sort by shield
 									trainer.sortShield();
 									trainer.teamToString();
 									break;
-								case "b":
+
+								case "b": //User decided to go back
 									break;
 							}
 							break;
 
 
-							case "2":
+							case "2": // User decided to search for a Pokemon
 							System.out.println("Search by: 1. Name   2. Type   b. Go back");
 							choice = scanner.nextLine();
 							while (!choice.equals("1") && !choice.equals("2") && !choice.equals("b")){
 								System.out.println("Not a real choice");
 								choice = scanner.nextLine();
+							}
+
+							if (choice.equals("b")){
+								break; //User decided to go back
+							}
+
+							else if (choice.equals("1")){ //User decided to search by name
+								System.out.println("Enter the name of the Pokemon you want to search for: ");
+								String name = scanner.nextLine();
+								trainer.searchName(name);
+							}
+
+							else{ //User decided to search by type
+								System.out.println("Enter the type of the Pokemon you want to search for: ");
+								String type = scanner.nextLine();
+								trainer.searchType(type);
+							}
+							break;
+
+
+							case "3": // User decided to switch Pokemon
+							System.out.println("Enter the name of the Pokemon or the placement of the Pokemon in your team that you want to switch to: ");
+							String pokemonName = scanner.nextLine();
+							try{
+								int pokemonNum = Integer.parseInt(pokemonName);
+								trainer.switchPokemon(pokemonNum);
+							}
+							catch (Exception e){
+								trainer.switchPokemon(pokemonName);
 							}
 
 	
