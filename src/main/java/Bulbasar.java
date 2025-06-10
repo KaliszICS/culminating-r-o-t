@@ -1,3 +1,3 @@
-public class Bulbasar extends Pokemon{
+public class Bulbasar{
     //filler
 }

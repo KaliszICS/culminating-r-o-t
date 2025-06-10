@@ -1,6 +1,7 @@
 /**
  * Main part of the Pokemon game the user interacts with
  * @author Radin Ajorlou
+ * @author Toby Tan
  * @version 1.0.0
  */
 import java.util.*;
@@ -183,17 +184,10 @@ public class Main {
 					default:
 						System.out.println("Invalid choice.");
 						break;
+					}
 				}
+				break;
 			}
-			break;
 		}
 	}
-		
-		
-
-
-
-
-	}
-
 }

@@ -1,3 +1,9 @@
+/**
+ * Shop sorts using merge and displays inv after sorting using displayInventory();
+ * @author Toby Tan
+ * @version 1.0.5
+*/
+
 import java.util.List;
 import java.util.ArrayList;
 
