@@ -10,9 +10,10 @@ public class Main {
 	public static void main(String args[]) {
 		Trainer trainer = new Trainer();
 		List<Pokemon> pokemonList = new ArrayList<>();
-		pokemonList.add(new Pikachu(80, 40));     // Adjust as needed(add bulbasaur class)
+		//pokemonList.add(new Pikachu(80, 40));     // Adjust as needed(add bulbasaur class)
 		pokemonList.add(new Charizard(100, 50));  
-		pokemonList.add(new Bulbasaur(90, 35));   // Adjust as needed (add bulbasaur class)
+		//pokemonList.add(new Bulbasaur(90, 35));   // Adjust as needed (add bulbasaur class)
+
 		Shop shop = new Shop(pokemonList);
 		Scanner scanner = new Scanner(System.in);
 		String choice;
@@ -83,6 +84,7 @@ public class Main {
 					while (!originalChoice.equals("b")){
 						System.out.println("\n1. Sort   2. Search   3. Switch   b. Go back");
 						originalChoice = scanner.nextLine();
+						choice = originalChoice;
 						while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("b")){
 							System.out.println("Not a real choice");
 							choice = scanner.nextLine();
@@ -98,23 +100,23 @@ public class Main {
 							}
 							switch (choice){
 								case "1":
-									trainer.getTeam().sortName();
+									trainer.sortName();
 									trainer.teamToString();
 									break;
 								case "2":
-									trainer.getTeam().sortLevel();
+									trainer.sortLevel();
 									trainer.teamToString();
 									break;
 								case "3":
-									trainer.getTeam().sortDamage();
+									trainer.sortDamage();
 									trainer.teamToString();
 									break;
 								case "4":
-									trainer.getTeam().sortHealth();
+									trainer.sortHealth();
 									trainer.teamToString();
 									break;
 								case "5":
-									trainer.getTeam().sortShield();
+									trainer.sortShield();
 									trainer.teamToString();
 									break;
 								case "b":

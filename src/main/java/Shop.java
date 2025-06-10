@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Shop {
+public class Shop extends Trainer {
     private List<Pokemon> inventory;
 
     public Shop(List<Pokemon> inventory) {
@@ -25,39 +25,6 @@ public class Shop {
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (inventory.get(j).getPrice() > inventory.get(j + 1).getPrice()) {
-                    swap(j, j + 1);
-                }
-            }
-        }
-    }
-
-    public void sortHealth() {
-        int n = inventory.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (inventory.get(j).getHp() > inventory.get(j + 1).getHp()) {
-                    swap(j, j + 1);
-                }
-            }
-        }
-    }
-
-    public void sortLevel() {
-        int n = inventory.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (inventory.get(j).getLevel() > inventory.get(j + 1).getLevel()) {
-                    swap(j, j + 1);
-                }
-            }
-        }
-    }
-
-    public void sortDamage() {
-        int n = inventory.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (inventory.get(j).getDamage() > inventory.get(j + 1).getDamage()) {
                     swap(j, j + 1);
                 }
             }
