@@ -1,46 +1,36 @@
 /**
- * Class Pikachu inherits class Pokemon
+ * Class Bulbasaur inherits class Pokemon
  * @author Toby Tan
  * @version 1.0.0
  */
 
-class Pikachu extends Pokemon{
+class Bulbasaur extends Pokemon{
 
     /**
-     * Pikachu constructor every param except level and price mandetory
+     * Bulbasaur constructor every param except level and price mandetory
      * @param level int - set to 1 by default
      * @param hp double
      * @param energy int 
      * @param price int (Will automatically set to 0 if not provided)
      */
-    public Pikachu(int level, double hp, int energy, int price){
-        super("Pikachu", level, hp, "lightning", energy, price);
+    public Bulbasaur(int level, double hp, int energy, int price){
+        super("Bulbasaur", level, hp, "Grass", energy, price);
     }
 
     //Constructor without level
-    public Pikachu(double hp, int energy, int price){
-        super ("Pikachu", hp, "lightning", energy, price, 3);
+    public Bulbasaur(double hp, int energy, int price){
+        super ("Bulbasaur", hp, "Grass", energy, price, 3);
     }
 
     //Constructor without price
-    public Pikachu(int level, double hp, int energy){
-        super ("Pikachu", level, hp, "lightning", energy, 3);
+    public Bulbasaur(int level, double hp, int energy){
+        super ("Bulbasaur", level, hp, "Grass", energy, 3);
     }
 
     //Constructor without level and price
-    public Pikachu(double hp, int energy){
-        super ("Pikachu", hp, "lightning", energy, 3);
+    public Bulbasaur(double hp, int energy){
+        super ("Bulbasaur", hp, "Grass", energy, 3);
     }
-    
-    //ADD SPECIALMOVE / CHANGE FOR PIKACHU AND BULBASAUR
-
-
-
-
-
-
-
-
 
     /**
      * Overrides the specialMove method from Pokemon class for Charizard

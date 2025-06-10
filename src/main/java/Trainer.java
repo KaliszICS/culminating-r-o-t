@@ -236,4 +236,28 @@ public class Trainer {
         }
     }
 
+    //CURRENCY FOR SHOP AND REWARDS
+    private int currency = 100;
+
+    public int getCurrency() {
+    return currency;
+    }
+
+    public void setCurrency(int currency) {
+        this.currency = currency;
+    }
+
+    public void addCurrency(int amount) {
+        currency += amount;
+    }
+
+    public boolean spendCurrency(int amount) {
+        if (currency >= amount) {
+            currency -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

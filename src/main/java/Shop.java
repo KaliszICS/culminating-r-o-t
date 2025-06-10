@@ -1,11 +1,10 @@
 /**
  * Shop sorts using merge and displays inv after sorting using displayInventory();
  * @author Toby Tan
- * @version 1.0.5
+ * @version 1.0.6
 */
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class Shop extends Trainer {
     private List<Pokemon> inventory;
@@ -13,7 +12,7 @@ public class Shop extends Trainer {
     public Shop(List<Pokemon> inventory) {
         this.inventory = inventory;
     }
-
+    //displays what the shop has for sale
     public void displayInventory() {
         for (int i = 0; i < inventory.size(); i++) {
             Pokemon p = inventory.get(i);
@@ -25,7 +24,7 @@ public class Shop extends Trainer {
                     " Type: " + p.getType());
         }
     }
-
+    //sorts price using merge
     public void sortPrice() {
         int n = inventory.size();
         for (int i = 0; i < n - 1; i++) {
@@ -36,10 +35,29 @@ public class Shop extends Trainer {
             }
         }
     }
-
+    //creates a swap for cleaner code
     private void swap(int i, int j) {
         Pokemon temp = inventory.get(i);
         inventory.set(i, inventory.get(j));
         inventory.set(j, temp);
+    }
+    public Pokemon buyPokemon(int index) {
+    if (index >= 0 && index < inventory.size()) {
+        Pokemon bought = inventory.get(index);
+        inventory.remove(index);
+        return bought;
+    } else {
+        System.out.println("Invalid index. Please select a valid Pokémon.");
+        return null;
+        }
+    }
+    public int getInventorySize() {
+    return inventory.size();
+    }
+    public Pokemon seePokemon(int index) {
+    if (index >= 0 && index < inventory.size()) {
+        return inventory.get(index);
+    }
+    return null;
     }
 }

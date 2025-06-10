@@ -11,9 +11,9 @@ public class Main {
 	public static void main(String args[]) {
 		Trainer trainer = new Trainer();
 		List<Pokemon> pokemonList = new ArrayList<>();
-		//pokemonList.add(new Pikachu(80, 40));     // Adjust as needed(add bulbasaur class)
-		pokemonList.add(new Charizard(100, 50));  
-		//pokemonList.add(new Bulbasaur(90, 35));   // Adjust as needed (add bulbasaur class)
+		pokemonList.add(new Pikachu(80.0, 40, 10));     // Adjust as needed(add bulbasaur class)
+		pokemonList.add(new Charizard(100.0, 50, 25));  
+		pokemonList.add(new Bulbasaur(90.0, 35, 15));   // Adjust as needed (add bulbasaur class)
 
 		Shop shop = new Shop(pokemonList);
 		Scanner scanner = new Scanner(System.in);
@@ -164,7 +164,7 @@ public class Main {
 							String pokemonName = scanner.nextLine();
 							try{
 								int pokemonNum = Integer.parseInt(pokemonName);
-								trainer.switchPokemon(pokemonNum);
+								//trainer.switchPokemon(pokemonNum);
 							}
 							catch (Exception e){
 								trainer.switchPokemon(pokemonName);
@@ -181,18 +181,31 @@ public class Main {
 			boolean stayInShop = true;
 
 			while (stayInShop) {
+				//Displays shop choices
 				System.out.println("What would you like to do?");
 				System.out.println("1. Display Inventory");
 				System.out.println("2. Sort by Price");
 				System.out.println("3. Sort by Health");
 				System.out.println("4. Sort by Level");
 				System.out.println("5. Sort by Damage");
-				System.out.println("6. Exit shop");
+				System.out.println("6. Purchase Pokemon");
+				System.out.println("7. Exit shop");
 				String shopChoice = scanner.nextLine();
-
+				//Enables shop
 				switch(shopChoice) {
 					case "1":
-						shop.displayInventory();
+					boolean viewingInventory = true;
+						while (viewingInventory) {
+							System.out.println("\n--- Shop Inventory ---");
+							shop.displayInventory();
+							System.out.println("Enter 'b' to go back to the shop menu and select purchase to buy a pokemon.");
+							String backChoice = scanner.nextLine();
+							if (backChoice.equalsIgnoreCase("b")) {
+								viewingInventory = false;
+							} else {
+								System.out.println("Invalid input. Type 'b' to go back.");
+							}
+						}
 						break;
 					case "2":
 						shop.sortPrice();
@@ -215,6 +228,31 @@ public class Main {
 						shop.displayInventory();
 						break;
 					case "6":
+					shop.displayInventory();
+					System.out.println("Your balance: $" + trainer.getCurrency());
+					System.out.println("Enter the number of the Pokémon you want to buy (1 to " + shop.getInventorySize() + "):");
+					try {
+						int index = Integer.parseInt(scanner.nextLine()) - 1;
+						if (index >= 0 && index < shop.getInventorySize()) {
+							Pokemon selected = shop.seePokemon(index); // new method to just view without removing
+							int cost = selected.getPrice();
+
+							if (trainer.spendCurrency(cost)) {
+								Pokemon purchased = shop.buyPokemon(index); // now safe to remove
+								trainer.addPokemon(purchased);
+								System.out.println("You bought " + purchased.getName() + " for $" + cost + "!");
+								System.out.println("Remaining balance: $" + trainer.getCurrency());
+							} else {
+								System.out.println("Not enough money! " + selected.getName() + " costs $" + cost + " but you only have $" + trainer.getCurrency());
+							}
+						} else {
+							System.out.println("Invalid selection.");
+						}
+					} catch (Exception e) {
+						System.out.println("Invalid input. Purchase cancelled.");
+					}
+					break;
+					case "7":
 						stayInShop = false;
 						break;
 					default:
@@ -222,7 +260,7 @@ public class Main {
 						break;
 					}
 				}
-				break;
+				break;//out of shop
 			}
 		}
 	}
