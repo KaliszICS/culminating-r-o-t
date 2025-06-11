@@ -1,7 +1,14 @@
 public class Ditto extends Pokemon
 {
-    public Ditto() {
-        super("Dito", 1, 100, "Water", 50, 0, 10, 1);
+        /**
+     * ditto constructor every param except level and price mandetory
+     * @param level int - set to 1 by default
+     * @param hp double
+     * @param energy int 
+     * @param price int (Will automatically set to 0 if not provided)
+     */
+    public Ditto(int level, double hp, int energy, int price) {
+        super("Dito", 1, 100, "Water", 50, 25, 10, 1);
     }
 
     public Ditto (int level, double hp, String type, int energy, int price, double damage, int shield) {

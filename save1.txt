@@ -1,7 +1,5 @@
-Test save
+1
 0
-3
+1
 Charizard,1,100.00,0,0
-Charizard,1,100.00,0,0
-Pikachu,1,85.00,40,10
 Charizard

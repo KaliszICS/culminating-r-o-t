@@ -16,9 +16,13 @@ public class Main {
     public static void main(String args[]) {
         Trainer trainer = new Trainer();
         List<Pokemon> pokemonList = new ArrayList<>();
-        pokemonList.add(new Pikachu(85.0, 40, 10));
-        pokemonList.add(new Charizard(124.0, 50, 25));
-        pokemonList.add(new Bulbasaur(62.0, 35, 18));
+        pokemonList.add(new Pikachu(85.0, 0, 10));
+        pokemonList.add(new Machop(100.0, 0, 25));
+        pokemonList.add(new Bulbasaur(62.0, 0, 18));
+        pokemonList.add(new Ditto(1, 100.0, 25, 0));
+
+
+
 
         Shop shop = new Shop(pokemonList);
         Scanner scanner = new Scanner(System.in);
@@ -135,6 +139,7 @@ public class Main {
                         System.out.println("5. Sort by Damage");
                         System.out.println("6. Purchase Pokemon");
                         System.out.println("7. Exit shop");
+                        System.out.println("\n");
 
                         String shopChoice = scanner.nextLine();
                         switch (shopChoice) {

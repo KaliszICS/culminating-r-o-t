@@ -22,7 +22,7 @@ class Snorlax extends Pokemon{
 
         if (opponent.getType.equals("Fighting")) {
             opponent.takeDamage((this.getDamage()/1.2)); // Fighting type Pokemon take 20% less damage from Normal type attacks
-            this.defend(); Snorlax defends itself every time it attacks when fighting a Fighting type Pokemon
+            this.defend(); Snorlax //defends itself every time it attacks when fighting a Fighting type Pokemon
         } else {
             super.attack(opponent); // Normal attack if opponent is not Fighting type
         }
