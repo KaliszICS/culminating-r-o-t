@@ -12,7 +12,6 @@ class Mewtwo extends Pokemon {
         super("Mewtwo", level, hp, "Psychic", energy, 0, 10, 1);
     }
 
-
     /**
      * Special move for Mewtwo
      * Mewtwo steals the opponent's shield and takes it dor itself

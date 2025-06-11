@@ -8,8 +8,9 @@ public class Ditto extends Pokemon
      * @param price int (Will automatically set to 0 if not provided)
      */
     public Ditto(int level, double hp, int energy, int price) {
-        super("Dito", 1, 100, "Water", 50, 25, 10, 1);
-    public Ditto() {
+        super("Dito", 1, 100.0, "Water", 50, 25, 10, 1);
+    }
+    public Ditto(int level, double hp, String type, int energy, int price, double damage, int shield) {
         super("Dito", 1, 100, "Water", 0, 0, 10, 1);
     }
 

@@ -7,8 +7,6 @@
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.crypto.Mac;
-
 abstract class Pokemon{
     private String name = "";
     private double level = 1;
@@ -322,11 +320,6 @@ abstract class Pokemon{
         return "Name: " + this.getName() + ", Level: " + this.getLevel() + ", HP: " + this.getHp() + ", Type: " + this.getType() + ", Energy: " + this.getEnergy() + ", Price: " + this.getPrice() + ", Damage: " + this.getDamage() + ", Shield: " + this.getShield();
     }
     
-    
-
-
-
-
 
     /**
      * Method for choosing the level the user wants to play (Pokemon.playLevel(level))
@@ -364,7 +357,7 @@ abstract class Pokemon{
             return this.fight(opponent6);
 
             case 7: 
-            Snorlax opponent7 = new Snorlax(12, 200.0, 70);
+            Snorlax opponent7 = new Snorlax(12, 200.0, 70, 25);
             return this.fight(opponent7);
 
 

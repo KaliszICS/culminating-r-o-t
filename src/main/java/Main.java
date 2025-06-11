@@ -19,8 +19,9 @@ public class Main {
         pokemonList.add(new Pikachu(85.0, 0, 10));
         pokemonList.add(new Machop(100.0, 0, 25));
         pokemonList.add(new Bulbasaur(62.0, 0, 18));
-        pokemonList.add(new Ditto(1, 100.0, 25, 0));
-
+        pokemonList.add(new Ditto(1, 100.0, 25, 99));
+        pokemonList.add(new Mewtwo(1, 1000, 0, 25, 0, 1));
+        pokemonList.add(new Snorlax(1, 100.0 ,0, 25));
 
 
 
