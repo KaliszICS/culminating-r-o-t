@@ -2,6 +2,7 @@
  * Main Class
  * @author Radin Ajorlou
  * @author Toby Tan
+ * @author Olivier Tan
  * @version 1.0.3
  */
 
@@ -24,12 +25,13 @@ public class Main {
         pokemonList.add(new Snorlax(1, 100.0 ,0, 25));
 
 
-
         Shop shop = new Shop(pokemonList);
         Scanner scanner = new Scanner(System.in);
         String choice;
 
-        //Start menu
+        /**
+         * Start menu. Allows the player to start a new game, or load a pervious save in order to continute from where they left off.
+         */
         do {
             System.out.println("1. New game   2. Load game");
             choice = scanner.nextLine();
@@ -54,7 +56,11 @@ public class Main {
             }
         } while (!choice.equals("1") && !choice.equals("2"));
 
-        // Main game loop
+        /**
+         * Main game loop
+         * This will allow players to access all features of the game (fighting, shop, save, load and quit)
+         * Each feature has it's own case.
+         */
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1. Fight   2. Go to shop   3. Save game   4. Load game   5. Quit game");
