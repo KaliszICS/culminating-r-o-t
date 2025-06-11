@@ -33,7 +33,6 @@ public class Main {
                 System.out.println("Here's your first Pokemon: CHARIZARD!");//gives user first pokemon
                 Charizard charizard = new Charizard(100.0, 0);
                 trainer = new Trainer(name, charizard);
-                trainer.addPokemon(charizard);
             } else if (choice.equals("2")) {
                 System.out.println("Enter load slot (1–3):");//Save slot
                 String slot = scanner.nextLine();
@@ -114,15 +113,8 @@ public class Main {
                                     }
                                     break;
                                 case "3":
-                                    System.out.println("Enter name or number of Pokemon:");
-                                    String input = scanner.nextLine();
-                                    try {
-                                        int num = Integer.parseInt(input);
-                                        trainer.switchPokemon(num);
-                                    } catch (Exception e) {
-                                        trainer.switchPokemon(input);
-                                    }
-                                    break;
+                                    trainer.switchPokemon();
+									break;
                                 case "b":
                                     switching = false;
                                     break;

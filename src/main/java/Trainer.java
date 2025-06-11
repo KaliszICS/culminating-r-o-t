@@ -120,60 +120,63 @@ public class Trainer {
         for (Pokemon p : team) {
             if (p.getName().equalsIgnoreCase(name)) {
                 activePokemon = p;
-                System.out.println(p.getName() + " is now your active Pokémon.");
+                System.out.println(p.getName() + " is now your active Pokemon.");
                 return;
             }
         }
-        System.out.println("No Pokémon named \"" + name + "\" found in your team.");
+        System.out.println("No Pokemon named \"" + name + "\" found in your team.");
     }
     /**
      * Switch active Pokémon by its 1-based index in the team.
      */
     public void switchPokemon(int index) {
-        if (index >= 1 && index <= team.size()) {
-            activePokemon = team.get(index - 1);
-            System.out.println(activePokemon.getName() + " is now your active Pokémon.");
-        } else {
-            System.out.println("Invalid Pokémon number: " + index);
+    if (index >= 1 && index <= team.size()) {
+        activePokemon = team.get(index - 1);
+        System.out.println(activePokemon.getName() + " is now your active Pokemon.");
+    } else {
+        System.out.println("Invalid Pokémon number: " + index);
         }
     }
         /**
      * Allow the user to switch Pokemon by entering a name or number.
      * @return the new active Pokemon
      */
-    public Pokemon switchPokemon() {
-        if (team.isEmpty()) {
-            System.out.println("You have no Pokemon to swap to.");
-            return null;
-        }
-        Scanner input = new Scanner(System.in);
-        System.out.println("Choose a Pokemon to switch to:");
-        for (int i = 0; i < team.size(); i++) {
-            System.out.println((i + 1) + ". " + team.get(i).getName());
-        }
-        System.out.println("Enter the name or number of the Pokemon:");
-        String userInput = input.nextLine().trim();
-        try {
-            int choice = Integer.parseInt(userInput);
-            if (choice >= 1 && choice <= team.size()) {
-                activePokemon = team.get(choice - 1);
-                System.out.println(activePokemon.getName() + " is now your active Pokemon!");
-                return activePokemon;
-            } else {
-                System.out.println("That Pokemon does not exist!");
-            }
-        } catch (NumberFormatException e) {
-            for (Pokemon p : team) {
-                if (p.getName().equalsIgnoreCase(userInput)) {
-                    activePokemon = p;
-                    System.out.println(p.getName() + " is now your active Pokemon!");
-                    return p;
-                }
-            }
-            System.out.println("That Pokemon does not exist!");
-        }
+public Pokemon switchPokemon() {
+    if (team.size() == 0) {
+        System.out.println("You have no Pokemon to switch to.");
         return null;
     }
+
+    Scanner input = new Scanner(System.in);
+    System.out.println("Choose a Pokemon to switch to:");
+    for (int i = 0; i < team.size(); i++) {
+        System.out.println((i + 1) + ". " + team.get(i).getName());
+    }
+
+    System.out.print("Enter name or number: ");
+    String userInput = input.nextLine().trim();
+
+    try {
+        int choice = Integer.parseInt(userInput);
+        if (choice >= 1 && choice <= team.size()) {
+            activePokemon = team.get(choice - 1);
+            System.out.println(activePokemon.getName() + " is now your active Pokemon.");
+            return activePokemon;
+        }
+    } catch (NumberFormatException e) {
+        for (Pokemon p : team) {
+            if (p.getName().equalsIgnoreCase(userInput)) {
+                activePokemon = p;
+                System.out.println(activePokemon.getName() + " is now your active Pokemon.");
+                return activePokemon;
+            }
+        }
+    }
+
+    System.out.println("Invalid selection.");
+    return null;
+}
+
 
     /**
      * Method to sort the team by damage
