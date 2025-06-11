@@ -1,6 +1,7 @@
 /**
  * Shop sorts using merge and displays inv after sorting using displayInventory();
  * @author Toby Tan
+ * @author Olivier Tan
  * @version 1.0.7
 */
 
@@ -50,16 +51,16 @@ public class Shop extends Trainer {
 
                 switch (attribute) {
                     case "price":
-                        shouldSwap = a.getPrice() > b.getPrice();
+                        shouldSwap = a.getPrice() < b.getPrice();
                         break;
                     case "health":
-                        shouldSwap = a.getHp() > b.getHp();
+                        shouldSwap = a.getHp() < b.getHp();
                         break;
                     case "level":
-                        shouldSwap = a.getLevel() > b.getLevel();
+                        shouldSwap = a.getLevel() < b.getLevel();
                         break;
                     case "damage":
-                        shouldSwap = a.getDamage() > b.getDamage();
+                        shouldSwap = a.getDamage() < b.getDamage();
                         break;
                 }
 

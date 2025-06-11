@@ -20,8 +20,8 @@ public class Trainer {
 
     /**
      * Constructors initializing the name and game level.
-     * @param name
-     * @param gameLevel
+     * @param name - name of the trainer
+     * @param gameLevel - level that the trainer is at
      */
     public Trainer(String name, int gameLevel) {
         this.name = name;
@@ -31,8 +31,8 @@ public class Trainer {
 
     /**
      * Constructor initializing the name and active Pokemon.
-     * @param name
-     * @param activePokemon
+     * @param name - name of the Pokemon.
+     * @param activePokemon - the Pokemon that is currently active and will be next in play.
      */
     public Trainer(String name, Pokemon activePokemon) {
         this.name = name;
@@ -44,10 +44,10 @@ public class Trainer {
 
     /**
      * Constructor initializing all values.
-     * @param name
-     * @param team
-     * @param activePokemon
-     * @param gameLevel
+     * @param name - name of the trainer.
+     * @param team - team of Pokemon that the trainer has.
+     * @param activePokemon - the current Pokemon that is active.
+     * @param gameLevel - the trainer's current game level.
      */
     public Trainer(String name, ArrayList<Pokemon> team, Pokemon activePokemon, int gameLevel) {
         this.name = name;
@@ -58,8 +58,8 @@ public class Trainer {
 
     /**
      * Constructor initializing name and team. This is for the shop's use.
-     * @param name
-     * @param team
+     * @param name - the trainer's name. 
+     * @param team - the list of Pokemon.
      */
     public Trainer(String name, ArrayList<Pokemon> team) {
         this.name = name;
@@ -67,6 +67,10 @@ public class Trainer {
         this.team = team;
     }
 
+    /**
+     * 
+     * @param name - name of the trainer.
+     */
     public Trainer(String name) {
         this.name = name;
         this.gameLevel = 0;
@@ -92,8 +96,8 @@ public class Trainer {
 
     /**
      * Removes a Pokemon from your team by name.
-     * @param name
-     * @return true if removed
+     * @param name - name of Pokemon that is getting removed.
+     * @return true if the Pokemon is found and removed.
      */
     public boolean removePokemon(String name) {
         for (int i = 0; i < team.size(); i++) {
@@ -120,7 +124,7 @@ public class Trainer {
 
     /**
      * Switch active Pokemon by its name (direct method)
-     * @param name name of the Pokemon to switch to
+     * @param name - name of the Pokemon to switch to
      */
     public void switchPokemon(String name) {
         for (Pokemon p : team) {
