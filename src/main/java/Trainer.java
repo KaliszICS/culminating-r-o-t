@@ -127,14 +127,14 @@ public class Trainer {
         System.out.println("No Pokemon named \"" + name + "\" found in your team.");
     }
     /**
-     * Switch active Pokémon by its 1-based index in the team.
+     * Switch active Pokemon by its index in the team.
      */
     public void switchPokemon(int index) {
     if (index >= 1 && index <= team.size()) {
         activePokemon = team.get(index - 1);
         System.out.println(activePokemon.getName() + " is now your active Pokemon.");
     } else {
-        System.out.println("Invalid Pokémon number: " + index);
+        System.out.println("Invalid Pokemon number: " + index);
         }
     }
         /**

@@ -6,6 +6,8 @@
  */
 
 
+ //WORK ON CHANGE PRICES, WHITE SPACE, JAVADOCS, other stuff too TBD
+
 import java.util.*;
 
 
@@ -131,7 +133,7 @@ public class Main {
                         System.out.println("3. Sort by Health");
                         System.out.println("4. Sort by Level");
                         System.out.println("5. Sort by Damage");
-                        System.out.println("6. Purchase Pokémon");
+                        System.out.println("6. Purchase Pokemon");
                         System.out.println("7. Exit shop");
 
                         String shopChoice = scanner.nextLine();
@@ -164,7 +166,7 @@ public class Main {
 							case "6":
                                 shop.displayInventory();
                                 System.out.println("Your balance: $" + trainer.getCurrency());
-                                System.out.println("Enter number of Pokémon to buy:");
+                                System.out.println("Enter number of Pokemon to buy:");
                                 try {
                                     int idx = Integer.parseInt(scanner.nextLine()) - 1;
                                     if (idx >= 0 && idx < shop.getInventorySize()) {

@@ -4,6 +4,9 @@
  * @version 1.0.0
  */
 
+
+
+ //CHANGE VALUES
 class Bulbasaur extends Pokemon{
 
     /**

@@ -4,6 +4,8 @@
  * @version 1.0.0
  */
 
+ //CHANGE VALUES AND SUPER?
+
 class Pikachu extends Pokemon{
 
     /**
