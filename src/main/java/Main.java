@@ -118,7 +118,7 @@ public class Main {
                                     String input = scanner.nextLine();
                                     try {
                                         int num = Integer.parseInt(input);
-                                        // trainer.switchPokemon(num);
+                                        trainer.switchPokemon(num);
                                     } catch (Exception e) {
                                         trainer.switchPokemon(input);
                                     }
