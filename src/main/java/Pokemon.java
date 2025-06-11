@@ -19,8 +19,6 @@ abstract class Pokemon{
     private int originalShield = 1;
     private int requiredEnergy = 50; //Default energy required for special move
     private double originalDamage = 1;
-
-    public final int MAX_LEVEL = 10;
     
     /**
      * Pokemon constructor
