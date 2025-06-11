@@ -330,34 +330,39 @@ abstract class Pokemon{
         Scanner scanner = new Scanner(System.in);
         boolean validMove = false;
 
+        int pokemonLevel = 1;
+        if (level > 7){
+            pokemonLevel = (level/7) + 1;
+            level -= 7; //Anything after level 7 is just the same pokemon but with higher stats 
+        }
 		switch (level){
 			case 1:
-			Charizard opponent = new Charizard(1, 100.0, 50);
+			Charizard opponent = new Charizard(1 * pokemonLevel, 100.0 * pokemonLevel, 50);
             return this.fight(opponent);  
 
 
             case 2:
-            Bulbasaur opponent2 = new Bulbasaur(5, 150.0, 50);
+            Bulbasaur opponent2 = new Bulbasaur(2 * pokemonLevel, 150.0 * pokemonLevel, 50);
             return this.fight(opponent2);
 
             case 3:
-            Pikachu opponent3 = new Pikachu(10, 150.0, 50);
+            Pikachu opponent3 = new Pikachu(3 * pokemonLevel, 150.0 * pokemonLevel, 50);
             return this.fight(opponent3);
 
             case 4:
-            Machop opponent4 = new Machop(10, 150.0, 100);
+            Machop opponent4 = new Machop(4 * pokemonLevel, 150.0 * pokemonLevel, 100);
             return this.fight(opponent4);
 
             case 5:
-            Ditto opponent5 = new Ditto(11, 150.0, 100);
+            Ditto opponent5 = new Ditto(5 * pokemonLevel, 150.0 * pokemonLevel, 100);
             return this.fight(opponent5);
 
             case 6:
-            Mewtwo opponent6 = new Mewtwo(11, 200, 70);
+            Mewtwo opponent6 = new Mewtwo(6 * pokemonLevel, 200 * pokemonLevel, 70);
             return this.fight(opponent6);
 
             case 7: 
-            Snorlax opponent7 = new Snorlax(12, 200.0, 70, 25);
+            Snorlax opponent7 = new Snorlax(7 * pokemonLevel, 200.0 * pokemonLevel, 70);
             return this.fight(opponent7);
 
 
