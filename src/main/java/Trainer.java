@@ -67,6 +67,12 @@ public class Trainer {
         this.team = team;
     }
 
+    public Trainer(String name) {
+        this.name = name;
+        this.gameLevel = 0;
+        this.team = new ArrayList<>();
+    }
+
     public Trainer() {}
 
     /**
@@ -345,8 +351,8 @@ public Pokemon switchPokemon() {
      * @return true if enough funds
      */
     public boolean spendCurrency(int amount) {
-        if (currency >= amount) {
-            currency -= amount;
+        if (this.getCurrency() >= amount) {
+            this.currency -= amount;
             return true;
         }
         System.out.println("Not enough currency. You have: " + currency);
@@ -358,7 +364,9 @@ public Pokemon switchPokemon() {
      * @param amount to add
      */
     public void addCurrency(int amount) {
-        currency += amount;
+        this.currency += amount;
     }
+
+
 
 }

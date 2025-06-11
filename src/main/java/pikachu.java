@@ -46,24 +46,25 @@ class Pikachu extends Pokemon{
 
     /**
      * Overrides the specialMove method from Pokemon class for Charizard
-     * Charizard's special move is Fireball which removes the opponent's shield and does a basic attack
+     * Charizard's special move is Lightning stun which skips the opponent's turn and does a basic attack 
+     * By skipping their turn it also resets their shield to their original shield if they used defend the previous turn
      * @param opponent Pokemon - the opponent being attacked
      */
     @Override
     public void specialMove(Pokemon opponent){
-        opponent.setShield(1); //removes the opponenets shield
         this.attack(opponent); // does a basic attack
-        System.out.println("Bulbsaur used Vine Whip!");
+        opponent.setShield(opponent.getOriginalShield()); // resets the opponent's shield to their original shield
+        System.out.println("Picachu used lighting stun!");
     }
 
     /**
-     * Overrides th attack method from Pokemon class for Charizard
-     * If the opponent is a water type, it does double damage
+     * Overrides the attack method from Pokemon class for Charizard
+     * If the opponent is a water or grass type, it does double damage
      * @param opponent Pokemon - the opponent being attacked
      */
     @Override 
     public void attack(Pokemon opponent) {
-        if (opponent.getType().equals("Water")){
+        if (opponent.getType().equals("Water") || opponent.getType().equals("Grass")) {
             opponent.takeDamage((this.getDamage() / opponent.getShield()) * 2 + 5); // double damage if opponent is water type
         }
         else{

@@ -1,7 +1,6 @@
-2
-100
+jac
 0
 2
-Charizard,1,100.0,0,0
-Charizard,1,100.0,0,0
+Bulbasaur,1,62.00,35,18
+Charizard,1,100.00,0,0
 Charizard

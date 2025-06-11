@@ -37,18 +37,18 @@ class Bulbasaur extends Pokemon{
 
     /**
      * Overrides the specialMove method from Pokemon class for Charizard
-     * Charizard's special move is Fireball which removes the opponent's shield and does a basic attack
+     * Bulbasaurs special attack sets its own original shield to double the opponents current for the rest of the fight and does a basic attack
      * @param opponent Pokemon - the opponent being attacked
      */
     @Override
     public void specialMove(Pokemon opponent){
-        opponent.setShield(1); //removes the opponenets shield
+        this.setOriginalShield((int)opponent.getShield() * 2); //sets its own shield to double the opponents current shield
         this.attack(opponent); // does a basic attack
         System.out.println("Bulbsaur used Vine Whip!");
     }
 
     /**
-     * Overrides th attack method from Pokemon class for Charizard
+     * Overrides the attack method from Pokemon class for Charizard
      * If the opponent is a water type, it does double damage
      * @param opponent Pokemon - the opponent being attacked
      */

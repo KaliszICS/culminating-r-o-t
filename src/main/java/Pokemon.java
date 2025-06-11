@@ -7,6 +7,8 @@
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.crypto.Mac;
+
 abstract class Pokemon{
     private String name = "";
     private double level = 1;
@@ -17,6 +19,7 @@ abstract class Pokemon{
     private int price = 0;
     private double damage = 0;
     private int originalShield = 1;
+    private int requiredEnergy = 50; //Default energy required for special move
 
     public final int MAX_LEVEL = 10;
     
@@ -213,6 +216,22 @@ abstract class Pokemon{
         this.originalShield = shield;
     }
 
+    /**
+     * Method to get the required energy for the special move
+     * @return int - the required energy for the special move
+     */
+    public int getRequiredEnergy(){
+        return this.requiredEnergy;
+    }
+
+
+    /**
+     * Method to set the required energy for the special move
+     * @param requiredEnergy int - the required energy for the special move
+     */
+    public void setRequiredEnergy(int requiredEnergy){
+        this.requiredEnergy = requiredEnergy;
+    }
 
     //Method to attack the oppponent
     public void attack(Pokemon opponent){
@@ -266,9 +285,12 @@ abstract class Pokemon{
             return false;
                     
             case "4":
-            if (this.getEnergy() > 50){
-                this.setEnergy(this.getEnergy() - 50);
+            if (this.getEnergy() > this.getRequiredEnergy()){
+                this.setEnergy(this.getEnergy() - this.getRequiredEnergy());
                 this.specialMove(opponent);
+                if (this.getName().equals("Pikachu")){
+                    return false; //Returns false so that Pikatchu special move skips the opponent's turn
+                }
                 return true;
             }        
             System.out.println("Not enough energy for special move");
@@ -305,6 +327,21 @@ abstract class Pokemon{
 			case 1:
 			Charizard opponent = new Charizard(100, 50);
             return this.fight(opponent);  
+
+
+            case 2:
+            Bulbasaur opponent2 = new Bulbasaur(100, 50);
+            return this.fight(opponent2);
+
+            case 3:
+            Pikachu opponent3 = new Pikachu(100, 50);
+            return this.fight(opponent3);
+
+            case 4:
+            Machop opponent4 = new Machop(100, 50);
+            return this.fight(opponent4);
+
+
             
             
 

@@ -34,25 +34,24 @@ class Charizard extends Pokemon{
 
     /**
      * Overrides the specialMove method from Pokemon class for Charizard
-     * Charizard's special move is Fireball which removes the opponent's shield and does a basic attack
+     * Charizard's special move is Fireball which skips his turn but doubles his damage for the remainder of the fight
      * @param opponent Pokemon - the opponent being attacked
      */
     @Override
     public void specialMove(Pokemon opponent){
-        opponent.setShield(1); //removes the opponenets shield
-        this.attack(opponent); // does a basic attack
+        this.setDamage(this.getDamage() * 2); // doubles the damage for the remainder of the fight
         System.out.println("Charizard used Fireball!");
     }
 
     /**
      * Overrides th attack method from Pokemon class for Charizard
-     * If the opponent is a water type, it does double damage
+     * If the opponent is a grass type, it does double damage
      * @param opponent Pokemon - the opponent being attacked
      */
     @Override 
     public void attack(Pokemon opponent) {
-        if (opponent.getType().equals("Water")){
-            opponent.takeDamage((this.getDamage() / opponent.getShield()) * 2 + 5); // double damage if opponent is water type
+        if (opponent.getType().equals("Grass")){
+            opponent.takeDamage((this.getDamage() / opponent.getShield()) * 2 + 5); // double damage if opponent is grass type
         }
         else{
             super.attack(opponent);
