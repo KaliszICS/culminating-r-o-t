@@ -61,7 +61,7 @@ public class Main {
             choice = scanner.nextLine();
 
             switch (choice) {
-                case "1":
+                case "1": //User decided to fight
                     System.out.println("Choose Level: 1 - " + (trainer.getGameLevel() + 1) + "\nb. Go back");
                     choice = scanner.nextLine();
                     if (choice.equals("b")) break;
@@ -86,7 +86,13 @@ public class Main {
                         boolean won = trainer.getActivePokemon().playLevel(levelChoice);
                         if (won && levelChoice > trainer.getGameLevel()) {
                             trainer.setGameLevel(levelChoice);
+                            trainer.addCurrency(50);
+                            System.out.println("You earned $50.");
                             System.out.println(trainer.getName() + " reached level " + trainer.getGameLevel() + "!");
+                        }
+                        else if(won){
+                            trainer.addCurrency(25);
+                            System.out.println("You earned $25.");
                         }
                     } else if (choice.equals("2")) {
                         System.out.println("Here are your Pokemon:");
