@@ -1,0 +1,8 @@
+1
+75
+0
+3
+Charizard,1,100.0,0,0
+Charizard,1,100.0,0,0
+Charizard,1,100.0,50,25
+Charizard

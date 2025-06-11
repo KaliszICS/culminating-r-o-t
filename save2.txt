@@ -1,0 +1,8 @@
+2
+90
+0
+3
+Charizard,1,100.0,0,0
+Charizard,1,100.0,0,0
+Pikachu,1,80.0,40,10
+Charizard

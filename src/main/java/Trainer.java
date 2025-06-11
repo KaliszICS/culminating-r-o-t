@@ -1,10 +1,14 @@
+import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Trainer {
     private String name = "";
-    private ArrayList<Pokemon>team = new ArrayList<>();
+    public ArrayList<Pokemon>team = new ArrayList<>();
     private Pokemon activePokemon = null;
     private int gameLevel = 0;
 
@@ -66,21 +70,6 @@ public class Trainer {
     }
 
     //save data to a file
-    public void save() {
-        try(FileWriter writer = new FileWriter(name + "_save.txt")){
-            writer.write("Trainer: " + name + "\n");
-            writer.write("Game Level: " + gameLevel + "\n");
-            writer.write("Team: \n");
-            for (Pokemon P: team) {
-                writer.write ("- " + p.getName() + "Lv. " + p.getlevel() + "Hp: " + p.getHp());
-            }
-            System.out.println("Trainer saved successfully.");
-        }   
-        catch(IOexception e){
-            System.out.println("Error saving data");
-        }
-    }
-
     //Getters
     public String getName(){
         return name;
@@ -111,10 +100,9 @@ public class Trainer {
      * Method to set the maximum reached level of the trainer
      * @param gameLevel - int the new maximum reached level of the trainer
      */
-    public void setGameLevel(int gameLevel){
-        this.gameLevel = gameLevel;
+    public void setGameLevel(int level) {
+    this.gameLevel = level;
     }
-
 
     /**
      * Method to sort the team by damage
@@ -260,4 +248,119 @@ public class Trainer {
         }
     }
 
+    
+
+
+
+
+
+
+
+    public void setActivePokemon(Pokemon p) {
+        this.activePokemon = p;
+    }   
+
+
+
+    //ADD AFTER OLIVIER'S CODE:
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public void saveGame(String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(filename));
+            writer.println(name);
+            writer.println(currency);
+            writer.println(gameLevel);
+            writer.println(team.size());
+
+            for (Pokemon p : team) {
+                writer.println(p.getClass().getSimpleName() + "," + p.getLevel() + "," + p.getHp() + "," + p.getEnergy() + "," + p.getPrice());
+            }
+
+            if (activePokemon != null) {
+                writer.println(activePokemon.getName()); // Save active Pokémon by name
+            } else {
+                writer.println("null");
+            }
+
+            writer.close();
+            System.out.println("Game saved to " + filename);
+        } catch (IOException e) {
+            System.out.println("Error saving game: " + e.getMessage());
+        }
+    }
+
+    public static Trainer loadGame(String filename) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String name = reader.readLine();
+            int currency = Integer.parseInt(reader.readLine());
+            int gameLevel = Integer.parseInt(reader.readLine());
+            int teamSize = Integer.parseInt(reader.readLine());
+
+            Trainer trainer = new Trainer();
+            trainer.setName(name);
+            trainer.setCurrency(currency);
+            trainer.setGameLevel(gameLevel);
+
+            List<Pokemon> team = new ArrayList<>();
+            Pokemon first = null;
+
+            for (int i = 0; i < teamSize; i++) {
+                String[] parts = reader.readLine().split(",");
+                String type = parts[0];
+                int level = Integer.parseInt(parts[1]);
+                double hp = Double.parseDouble(parts[2]);
+                int energy = Integer.parseInt(parts[3]);
+                int price = Integer.parseInt(parts[4]);
+
+                Pokemon p = null;
+                switch (type) {
+                    case "Pikachu":
+                        p = new Pikachu(level, hp, energy, price);
+                        break;
+                    case "Charizard":
+                        p = new Charizard(level, hp, energy, price);
+                        break;
+                    case "Bulbasaur":
+                        p = new Bulbasaur(level, hp, energy, price);
+                        break;
+                    default:
+                        System.out.println("Unknown Pokémon type: " + type);
+                }
+
+                if (p != null) {
+                    trainer.addPokemon(p);
+                    if (first == null) {
+                        first = p; // Save first as fallback for active
+                    }
+                }
+            }
+
+            String activeName = reader.readLine();
+            reader.close();
+
+            for (Pokemon p : trainer.team) {
+                if (p.getName().equalsIgnoreCase(activeName)) {
+                    trainer.setActivePokemon(p);
+                    break;
+                }
+            }
+
+            // fallback in case saved active was null or didn't match
+            if (trainer.getActivePokemon() == null && first != null) {
+                trainer.setActivePokemon(first);
+            }
+
+            System.out.println("Game loaded from " + filename);
+            return trainer;
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error loading game: " + e.getMessage());
+            return null;
+        }
+    }
 }
