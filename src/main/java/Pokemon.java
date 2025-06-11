@@ -20,6 +20,7 @@ abstract class Pokemon{
     private double damage = 1;
     private int originalShield = 1;
     private int requiredEnergy = 50; //Default energy required for special move
+    private double originalDamage = 1;
 
     public final int MAX_LEVEL = 10;
     
@@ -44,6 +45,7 @@ abstract class Pokemon{
         this.damage = damage * level;
         this.shield = shield;
         this.originalShield = shield;
+        this.originalDamage = this.damage;
     }
 
 
@@ -55,6 +57,7 @@ abstract class Pokemon{
         this.energy = energy;
         this.price = price;
         this.damage = damage * level;
+        this.originalDamage = this.damage;
     }
 
     //No price constructor
@@ -64,7 +67,8 @@ abstract class Pokemon{
         this.hp = hp;
         this.type = type;
         this.energy = energy;
-        this.damage = damaage * level;
+        this.damage = damage * level;
+        this.originalDamage = this.damage;
     }
 
     //No price and no level constructor
@@ -74,6 +78,7 @@ abstract class Pokemon{
         this.type = type;
         this.energy = energy;
         this.damage = damage * level;
+        this.originalDamage = this.damage;
     }
 
     /**
@@ -105,7 +110,7 @@ abstract class Pokemon{
      * @param level int - new level of the Pokemon
      */
     public void setLevel(double level){
-        this.setDamage(this.getDamage() * level;
+        this.setDamage(this.getDamage() * level);
         this.level = level;
     }
 
@@ -202,7 +207,7 @@ abstract class Pokemon{
      * @param damage double - damage will equal (damage + level)^2
      */
     public void setDamage(double damage){
-        this.damage = (damage + this.level) * (damage + this.level);
+        this.damage = (damage * this.level);
     }
 
     /**
@@ -232,6 +237,14 @@ abstract class Pokemon{
      */
     public void setRequiredEnergy(int requiredEnergy){
         this.requiredEnergy = requiredEnergy;
+    }
+
+
+    public double getOriginalDamage(){
+        return this.originalDamage;
+    }
+    public void setOriginalDamage(double originalDamage){
+        this.originalDamage = originalDamage;
     }
 
     //Method to attack the oppponent
@@ -351,7 +364,7 @@ abstract class Pokemon{
             return this.fight(opponent6);
 
             case 7: 
-            Snorlax opponent7 = new Snorlax(12, 200, 70);
+            Snorlax opponent7 = new Snorlax(12, 200.0, 70);
             return this.fight(opponent7);
 
 
@@ -409,6 +422,11 @@ abstract class Pokemon{
             }
             validMove = false;
         }
+
+        this.setDamage(this.getOriginalDamage());
+        this.setShield(this.getOriginalShield());
+        opponent.setDamage(opponent.getOriginalDamage());
+        opponent.setShield(opponent.getOriginalShield());
     
         if (this.getHp() <= 0){
             System.out.println("You Lose");

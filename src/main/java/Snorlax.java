@@ -4,6 +4,11 @@ class Snorlax extends Pokemon{
         this.setRequiredEnergy(60); // Setting the required energy for Snorlax's special move
     }
 
+    public Snorlax(int level, double hp, int energy) {
+        super("Snorlax", level, hp, "Normal", energy, 0, 20, 2);
+        this.setRequiredEnergy(60); // Setting the required energy for Snorlax's special move
+    }
+
     /**
      * Snorlax's special move is Rest.
      * It heals itself and doubles its shield.
