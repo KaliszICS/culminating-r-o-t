@@ -16,22 +16,22 @@ class Pikachu extends Pokemon{
      * @param price int (Will automatically set to 0 if not provided)
      */
     public Pikachu(int level, double hp, int energy, int price){
-        super("Pikachu", level, hp, "lightning", energy, price);
+        super("Pikachu", level, hp, "Lightning", energy, price);
     }
 
     //Constructor without level
     public Pikachu(double hp, int energy, int price){
-        super ("Pikachu", hp, "lightning", energy, price, 3);
+        super ("Pikachu", hp, "Lightning", energy, price, 3);
     }
 
     //Constructor without price
     public Pikachu(int level, double hp, int energy){
-        super ("Pikachu", level, hp, "lightning", energy, 3);
+        super ("Pikachu", level, hp, "Lightning", energy, 3);
     }
 
     //Constructor without level and price
     public Pikachu(double hp, int energy){
-        super ("Pikachu", hp, "lightning", energy, 3);
+        super ("Pikachu", hp, "Lightning", energy, 3);
     }
     
     //ADD SPECIALMOVE / CHANGE FOR PIKACHU AND BULBASAUR

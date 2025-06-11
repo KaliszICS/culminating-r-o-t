@@ -17,7 +17,7 @@ abstract class Pokemon{
     private int energy = 0;
     private double shield = 1;
     private int price = 0;
-    private double damage = 0;
+    private double damage = 1;
     private int originalShield = 1;
     private int requiredEnergy = 50; //Default energy required for special move
 
@@ -41,7 +41,7 @@ abstract class Pokemon{
         this.type = type;
         this.energy = energy;
         this.price = price;
-        this.damage = damage;
+        this.damage = damage * level;
         this.shield = shield;
         this.originalShield = shield;
     }
@@ -54,7 +54,7 @@ abstract class Pokemon{
         this.type = type;
         this.energy = energy;
         this.price = price;
-        this.damage = (damage + this.level) * (damage + this.level);
+        this.damage = damage * level;
     }
 
     //No price constructor
@@ -64,7 +64,7 @@ abstract class Pokemon{
         this.hp = hp;
         this.type = type;
         this.energy = energy;
-        this.damage = (damage + this.level) * (damage + this.level);
+        this.damage = damaage * level;
     }
 
     //No price and no level constructor
@@ -73,7 +73,7 @@ abstract class Pokemon{
         this.hp = hp;
         this.type = type;
         this.energy = energy;
-        this.damage = (damage + this.level) * (damage + this.level);
+        this.damage = damage * level;
     }
 
     /**
@@ -105,6 +105,7 @@ abstract class Pokemon{
      * @param level int - new level of the Pokemon
      */
     public void setLevel(double level){
+        this.setDamage(this.getDamage() * level;
         this.level = level;
     }
 
@@ -325,21 +326,33 @@ abstract class Pokemon{
 
 		switch (level){
 			case 1:
-			Charizard opponent = new Charizard(100, 50);
+			Charizard opponent = new Charizard(1, 100.0, 50);
             return this.fight(opponent);  
 
 
             case 2:
-            Bulbasaur opponent2 = new Bulbasaur(100, 50);
+            Bulbasaur opponent2 = new Bulbasaur(5, 150.0, 50);
             return this.fight(opponent2);
 
             case 3:
-            Pikachu opponent3 = new Pikachu(100, 50);
+            Pikachu opponent3 = new Pikachu(10, 150.0, 50);
             return this.fight(opponent3);
 
             case 4:
-            Machop opponent4 = new Machop(100, 50);
+            Machop opponent4 = new Machop(10, 150.0, 100);
             return this.fight(opponent4);
+
+            case 5:
+            Ditto opponent5 = new Ditto(11, 150.0, 100);
+            return this.fight(opponent5);
+
+            case 6:
+            Mewtwo opponent6 = new Mewtwo(11, 200, 70);
+            return this.fight(opponent6);
+
+            case 7: 
+            Snorlax opponent7 = new Snorlax(12, 200, 70);
+            return this.fight(opponent7);
 
 
             

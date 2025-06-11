@@ -9,10 +9,16 @@ public class Ditto extends Pokemon
      */
     public Ditto(int level, double hp, int energy, int price) {
         super("Dito", 1, 100, "Water", 50, 25, 10, 1);
+    public Ditto() {
+        super("Dito", 1, 100, "Water", 0, 0, 10, 1);
     }
 
-    public Ditto (int level, double hp, String type, int energy, int price, double damage, int shield) {
-        super("Deto", level, hp, type, energy, price, damage, shield);
+    public Ditto (int level, double hp, int energy, int price, double damage, int shield) {
+        super("Deto", level, hp, "Water", energy, price, damage, shield);
+    }
+
+    public Ditto (int level, double hp, int energy) {
+        super("Dito", level, hp, "Water", energy, 0, 10, 1);
     }
 
 
