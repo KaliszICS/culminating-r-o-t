@@ -1,3 +1,9 @@
+/**
+ * Machop class extends Pokemon
+ * @author Radin Ajorlou 
+ * @version 1.0.0
+ */
+
 public class Machop extends Pokemon {
 
     /**

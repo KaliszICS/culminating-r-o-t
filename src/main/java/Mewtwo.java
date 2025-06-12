@@ -1,3 +1,9 @@
+/**
+ * class Mewtwo extends Pokemon
+ * @author Radin Ajorlou
+ * @version 1.0.0
+ */
+
 class Mewtwo extends Pokemon {
 
     public Mewtwo() {
@@ -10,6 +16,10 @@ class Mewtwo extends Pokemon {
 
     public Mewtwo(int level, double hp, int energy) {
         super("Mewtwo", level, hp, "Psychic", energy, 0, 10, 1);
+    }
+
+    public Mewtwo(double hp, int energy, int price) {
+        super("Mewtwo", hp, "Psychic", energy, price, 10);
     }
 
     /**
@@ -25,6 +35,11 @@ class Mewtwo extends Pokemon {
         System.out.println("Mewtwo used SCRATCH!");
     }
 
+    /**
+     * Overrides the basic attack for Mewtwo
+     * Mewtow ignores the opponent's shield if its original shield is greater than 5
+     * @param opponent Pokemon - the opponent that Mewtwo is attacking
+     */
     @Override
     public void attack(Pokemon opponent) {
         if (opponent.getOriginalShield() > 5){

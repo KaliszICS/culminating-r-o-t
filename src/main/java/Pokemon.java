@@ -214,6 +214,10 @@ abstract class Pokemon{
         return this.originalShield;
     }
 
+    /**
+     * Method to set the original shield of the pokemon
+     * @param shield int - the original shield of the pokemon
+     */
     public void setOriginalShield(int shield){
         this.originalShield = shield;
     }
@@ -236,44 +240,87 @@ abstract class Pokemon{
     }
 
 
+    /**
+     * Method to get the original damage of the pokemon
+     * @return double - the original damage of the pokemon
+     */
     public double getOriginalDamage(){
         return this.originalDamage;
     }
+
+    /**
+     * Method to set the original damage of the pokemon
+     * @param originalDamage double - the original damage of the pokemon
+     */
     public void setOriginalDamage(double originalDamage){
         this.originalDamage = originalDamage;
     }
 
-    //Method to attack the oppponent
+    /**
+     * Method to attack the opponent Pokemon
+     * It damages the opponent by the damage of the pokemon/shield of opponent + 5
+     * It also adds to the Pokemons energy by (level + 1)^2
+     * @param opponent Pokemon - the opponent Pokemon
+     */
     public void attack(Pokemon opponent){
-        opponent.takeDamage((this.damage/opponent.getShield()) + 5); // damages the opponent by the level of the pokemon^2/shield of opponent + 5
+        opponent.takeDamage((this.damage/opponent.getShield()) + 5); // damages the opponent by the damage of the pokemon/shield of opponent + 5
         this.energy += (this.level + 1) * (this.level + 1); //Adds to the pokemons energy by the (level + 1)^2
+        pause(1);
+        System.out.println(this.getName() + " used basic attack");;
     }
 
-    //Method to defend
+    /**
+     * Method to defend the Pokemon 
+     * It increased the Pokemons shield by its level * 2
+     * It also adds to the Pokemons energy by (level + 1)^2
+     */
     public void defend(){
-        this.shield += this.shield* this.level * 2;   //defends by increasing the pokemons shield by its level * 2
+        this.shield += this.originalShield * this.level * 2;   //defends by increasing the pokemons shield by its level * 2
+        this.energy += (this.level + 1) * (this.level + 1); //Adds to the pokemons energy by its level * 2
+        pause(1);
         System.out.println(this.getName() + " now has " + this.getShield() + " shield!");
     }
 
-    //Method to heal
+    /**
+     * Method to heal the Pokemon
+     * Heals the Pokemon by its (level *2) + 20
+     */
     public void heal(){
-        this.hp += this.level * 2; //Adds to the health of the Pokemon by its level * 2
+        this.hp += 2 * this.level + 20; //Adds to the health of the Pokemon by its level * 2
+        pause(1);
         System.out.println (name + " now has " + hp + " hp!");
     }
 
     //Method for special move (Each Pokemon must have at least 1)
     abstract void specialMove(Pokemon opponent);
 
-    //Method for taking damage
+    /**
+     * Method to take damage
+     * @param damage double - the amount of damage the Pokemon takes
+     */
     public void takeDamage(double damage){
         this.hp -= damage;
+        pause(1);
         System.out.println (name + " took " + damage + " damage! Current health: " + this.hp);
     }
 
+    /**
+     * Method to get the stats of the Pokemon 
+     * Less detailed than toString only stats that are useful during the fight
+     * @return String - the stats of the Pokemon
+     */
     public String getStats(){
+        pause(1);
         return (this.getName() + ": Hp = " + this.getHp() + ", energy = " + this.getEnergy() + ", level = " + this.getLevel() + ", damage = " + this.getDamage() + ", current shield = " + this.getShield());
     }
 
+
+    /**
+     *Method for moving the Pokemon 
+     *@param opponent Pokemon - the opponent Pokemon
+     *@param choice String - the move the user wants to make (1 - attack, 2 - defend, 3 - heal, 4 - special move)
+     *@return booleam - true if the move was valid, false if it was not (move doesnt exist or not enough energy)
+     */
     public boolean move(Pokemon opponent, String choice){
 
         switch (choice){
@@ -291,18 +338,21 @@ abstract class Pokemon{
                 this.setEnergy(this.getEnergy() - 30);
                 return true;
             }
+            pause(1);
             System.out.println("Not enough energy to heal");
             return false;
                     
             case "4":
             if (this.getEnergy() > this.getRequiredEnergy()){
                 this.setEnergy(this.getEnergy() - this.getRequiredEnergy());
+                pause(1);
                 this.specialMove(opponent);
                 if (this.getName().equals("Pikachu")){
                     return false; //Returns false so that Pikatchu special move skips the opponent's turn
                 }
                 return true;
             }        
+            pause(1);
             System.out.println("Not enough energy for special move");
             return false;
                     
@@ -313,6 +363,10 @@ abstract class Pokemon{
                 
 	}
 
+    /**
+     * toString method to print the Pokemon's stats 
+     * @return String - the stats of the Pokemon
+     */
     @Override
     public String toString(){
         return "Name: " + this.getName() + ", Level: " + this.getLevel() + ", HP: " + this.getHp() + ", Type: " + this.getType() + ", Energy: " + this.getEnergy() + ", Price: " + this.getPrice() + ", Damage: " + this.getDamage() + ", Shield: " + this.getShield();
@@ -324,10 +378,6 @@ abstract class Pokemon{
      * @param level int - the level the user wants to play (1 - the maximum reached level)
      */
     public boolean playLevel (int level){
-        Random rand = new Random();
-        Scanner scanner = new Scanner(System.in);
-        boolean validMove = false;
-
         int pokemonLevel = 1;
         if (level > 7){
             pokemonLevel = (level/7) + 1;
@@ -356,7 +406,7 @@ abstract class Pokemon{
             return this.fight(opponent5);
 
             case 6:
-            Mewtwo opponent6 = new Mewtwo(6 * pokemonLevel, 200 * pokemonLevel, 70);
+            Mewtwo opponent6 = new Mewtwo(6 * pokemonLevel, 200.0 * pokemonLevel, 70);
             return this.fight(opponent6);
 
             case 7: 
@@ -392,19 +442,24 @@ abstract class Pokemon{
         boolean validMove = false;
 
         if (firstToGo == 0){
+            pause(1);
             System.out.println(this.getName() + " goes first");
         }
         else{
+            pause(1);
             System.out.println(opponent.getName() + " goes first");
             validMove = true;
         }
-        while (this.getHp() > 0 && opponent.getHp() > 0){
+        while (this.getHp() > 0 && opponent.getHp() > 0){ //Runs until one of the Pokemons has less than 0 hp
             while (validMove == false){
             this.setShield(this.getOriginalShield());
-            System.out.println("Your turn\n" + 
-                                "1. Attack   2. Defend   3. Heal   4. Special Move\n" +
-                                this.getStats() + "\n" +
-                                opponent.getStats());
+            pause(1);
+            System.out.println("Your turn");
+            pause(1);
+            System.out.println("Your " + this.getStats());
+            System.out.println(opponent.getStats());
+            pause(1);
+            System.out.println("Choose your move: 1. Attack   2. Defend   3. Heal   4. Special Move");
             String choice = scanner.nextLine();
             validMove = this.move(opponent, choice);
            } 
@@ -412,6 +467,7 @@ abstract class Pokemon{
             validMove = false;
             while (validMove == false){
                 opponent.setShield(opponent.getOriginalShield());
+                pause(1);
                 System.out.println("Opponenet's turn");
                 int opponentMove = rand.nextInt(4) + 1;
                 validMove = opponent.move(this, Integer.toString(opponentMove));
@@ -419,12 +475,14 @@ abstract class Pokemon{
             validMove = false;
         }
 
+        //Resets all the stats that have been increased during the fight
         this.setDamage(this.getOriginalDamage());
         this.setShield(this.getOriginalShield());
         opponent.setDamage(opponent.getOriginalDamage());
         opponent.setShield(opponent.getOriginalShield());
     
         if (this.getHp() <= 0){
+            pause(1);
             System.out.println("You Lose");
             this.setHp(100);
             this.setEnergy(0);
@@ -432,11 +490,28 @@ abstract class Pokemon{
         }
         else{
             this.setLevel(this.getLevel() + 1 - Math.log((int)this.getLevel()));
+            pause(1);
             System.out.println("You Won\n" +
                                 this.getName() + "'s new level: " + this.getLevel());
             this.setHp(100);
             this.setEnergy(0);
             return true;
+        }
+    }
+
+
+
+
+    /**
+     * Method to pause
+     * To make the printing slower during fight 
+     * @param seconds double - the amount of seconds you want to pause
+     */
+    public static void pause(double seconds){
+        try {
+            Thread.sleep((long) (seconds * 1000));
+        }
+        catch(InterruptedException e){
         }
     }
 }

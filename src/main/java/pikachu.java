@@ -1,5 +1,6 @@
 /**
  * Class Pikachu inherits class Pokemon
+ * @author Radin Ajorlou
  * @author Toby Tan
  * @version 1.0.0
  */

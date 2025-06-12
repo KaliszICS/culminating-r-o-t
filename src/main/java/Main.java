@@ -20,18 +20,17 @@ public class Main {
         pokemonList.add(new Pikachu(85.0, 0, 10));
         pokemonList.add(new Machop(100.0, 0, 25));
         pokemonList.add(new Bulbasaur(62.0, 0, 18));
-        pokemonList.add(new Ditto(1, 100.0, 25, 99));
-        pokemonList.add(new Mewtwo(1, 1000, 0, 25, 0, 1));
-        pokemonList.add(new Snorlax(1, 100.0 ,0, 25));
+        pokemonList.add(new Ditto(100.0, 25, 99));
+        pokemonList.add(new Mewtwo(1000.0, 0, 25));
+        pokemonList.add(new Snorlax(100.0 ,0, 25));
 
 
         Shop shop = new Shop(pokemonList);
         Scanner scanner = new Scanner(System.in);
         String choice;
 
-        /**
-         * Start menu. Allows the player to start a new game, or load a pervious save in order to continute from where they left off.
-         */
+        
+        //Start menu. Allows the player to start a new game, or load a pervious save in order to continute from where they left off.
         do {
             System.out.println("1. New game   2. Load game");
             choice = scanner.nextLine();
@@ -93,12 +92,12 @@ public class Main {
                         if (won && levelChoice > trainer.getGameLevel()) {
                             trainer.setGameLevel(levelChoice);
                             trainer.addCurrency(50);
-                            System.out.println("You earned $50.");
+                            System.out.println("You earned $10.");
                             System.out.println(trainer.getName() + " reached level " + trainer.getGameLevel() + "!");
                         }
                         else if(won){
                             trainer.addCurrency(25);
-                            System.out.println("You earned $25.");
+                            System.out.println("You earned $5.");
                         }
                     } else if (choice.equals("2")) {
                         System.out.println("Here are your Pokemon:");

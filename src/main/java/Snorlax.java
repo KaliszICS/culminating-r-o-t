@@ -1,3 +1,9 @@
+/**
+ * Snorlax class extends Pokemon
+ * @author Radin Ajorlou
+ * @verion 1.0.0
+ */
+
 class Snorlax extends Pokemon{
     public Snorlax(double hp, int energy) {
         super("Snorlax", 1, hp, "Normal", energy, 0, 20, 2);
@@ -11,6 +17,11 @@ class Snorlax extends Pokemon{
 
     public Snorlax(int level, double hp, int energy) {
         super("Snorlax", level, hp, "Normal", energy, 0, 20, 2);
+        this.setRequiredEnergy(60); // Setting the required energy for Snorlax's special move
+    }
+
+    public Snorlax(double hp, int energy, int price) {
+        super("Snorlax", hp, "Normal", energy, price, 20);
         this.setRequiredEnergy(60); // Setting the required energy for Snorlax's special move
     }
 
