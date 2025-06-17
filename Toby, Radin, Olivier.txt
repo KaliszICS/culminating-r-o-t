@@ -1,0 +1,10 @@
+Boxes are not split by name, variables and methods
+No inherit/implement arrows despite it being in your UML.
+Interfaces should not use variables
+You use an aggregation arrow but don't have the class as an instance variable.
+SortSearch uses methods that have multiple words?
+
+All variables and methods are capitalized.
+feels unfinished and unpolished.  Does Battle have a player and an enemy pokemon? Is battle only done through the player pokemon or is it done through the battle class?  How do you access the shop?
+
+65%

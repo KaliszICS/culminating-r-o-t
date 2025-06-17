@@ -1,0 +1,22 @@
+missing prompt at start of game.
+prompts should be on the same line as the input (use print not println)
+Level choice selection is weird and looks like it is part of the header not a choice.  Also why is b back and 1 is the choice.  Make this consistent.
+pauses take way too long.  Makes the game extremely slow, especially at the start.
+move is said after the damage which is a weird order.
+Your game is loading pokemon with their price as their damage.
+Charizard is going down in level for winning fights.
+Can never advance past lvl 2?
+Information of pokemon is not being saved properly either. Hp is being reset.
+
+Probably could have been a bit easier if you had spread things out a little more for interactions to make the coding of the game easier (create methods similar to the way we did in problem set 4)
+Remembe to simplify coding as much as possible and not make a huge amount of if statements and loops when unnecessary.  Also use methods to break up code more.
+
+
+Great job on comments and javadocs.
+
+K(30%): 100%
+I(30%): 70%
+C(10%): 100%
+A(30%): 70%
+
+82%
